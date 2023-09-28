@@ -12,3 +12,4 @@ asyncio
 pillow
 motor
 wheel
+six
