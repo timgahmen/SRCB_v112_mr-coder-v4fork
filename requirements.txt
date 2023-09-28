@@ -6,3 +6,9 @@ cryptg
 tgcrypto
 pyrogram
 python-decouple
+python-dotenv
+numpy
+asyncio
+pillow
+motor
+wheel
