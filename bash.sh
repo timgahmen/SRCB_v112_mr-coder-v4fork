@@ -1,4 +1,4 @@
-echo "starting Bot ~@DroneBots";
+echo "starting Bot ~RADHE RADHE";
 LANG=en_US.UTF-8
 export PYTHONIOENCODING=utf-8
 pip install -U pip wheel pyaesni
