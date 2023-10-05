@@ -60,8 +60,7 @@ async def storage(event):
 @Drone.on(events.NewMessage(incoming=True, pattern="/clear"))
 async def clear(event):
     try:
-        zylern = "chmod 777 ./downloads"
-        zylern = "./downloads && rm *"
+        zylern = "rm -rf downloads"
         fetch = await asyncrunapp(
             zylern,
             stdout=asyncPIPE,
