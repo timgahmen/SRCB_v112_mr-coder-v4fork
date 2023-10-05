@@ -1,6 +1,6 @@
 # CREATED BY MYSELF WITH ALL EMOTIONS AND NO CODING KNOWLEDGE
 
-from .. import Drone
+from .. import bot as Drone
 from telethon import events, Button
 from asyncio import create_subprocess_shell as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
