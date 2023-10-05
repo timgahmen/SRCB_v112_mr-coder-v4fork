@@ -5,7 +5,7 @@ from asyncio.subprocess import PIPE as asyncPIPE
 import psutil, os, signal, sys, platform, sysconfig
 from psutil import disk_usage, cpu_percent, virtual_memory, Process as psprocess
 
-@Drone.on(events.NewMessage(incoming=True, pattern="/cpu"))
+@Drone.on(events.NewMessage(incoming=True, from_users=AUTH, pattern='/cpu'))
 async def storage(event):
     cpu = psutil.cpu_percent()
     load1, load5, load15 = psutil.getloadavg()
