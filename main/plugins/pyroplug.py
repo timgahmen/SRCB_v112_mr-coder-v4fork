@@ -117,7 +117,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                     )
                 )
             
-            elif str(file).split(".")[-1] in ['jpg', 'jpeg', 'png', 'webp']:
+            elif msg.media==MessageMediaType.PHOTO:
                 await edit.edit("Uploading photo.")
                 await bot.send_file(sender, file, caption=caption)
             else:
