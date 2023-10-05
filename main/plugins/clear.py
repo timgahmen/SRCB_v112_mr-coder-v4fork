@@ -7,7 +7,7 @@ import psutil, os, signal
 @Drone.on(events.NewMessage(incoming=True, pattern="/clear"))
 async def clear(event):
     try:
-        zylern = "rm -rf Downloads"
+        zylern = "cd ./Downloads && rm *"
         fetch = await asyncrunapp(
             zylern,
             stdout=asyncPIPE,
