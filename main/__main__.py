@@ -4,7 +4,7 @@ from main.utils import load_plugins
 import logging
 from . import bot
 LANG=en_US.UTF-8
-export PYTHONIOENCODING=utf-8
+import PYTHONIOENCODING=utf-8
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
