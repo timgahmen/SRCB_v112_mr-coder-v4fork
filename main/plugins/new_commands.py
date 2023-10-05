@@ -61,7 +61,7 @@ async def storage(event):
 async def clear(event):
     try:
         zylern = "chmod 777 ./downloads"
-        zylern = "cd ./downloads && rm *"
+        zylern = "./downloads && rm *"
         fetch = await asyncrunapp(
             zylern,
             stdout=asyncPIPE,
