@@ -1,4 +1,4 @@
-from .. import Drone
+from .. import bot as Drone
 from telethon import events, Button
 import psutil, os, signal, sys, platform, sysconfig
 from psutil import disk_usage, cpu_percent, virtual_memory, Process as psprocess
