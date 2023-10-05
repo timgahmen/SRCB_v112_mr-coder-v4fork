@@ -3,7 +3,8 @@ from pathlib import Path
 from main.utils import load_plugins
 import logging
 from . import bot
-
+LANG=en_US.UTF-8
+export PYTHONIOENCODING=utf-8
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
@@ -17,7 +18,7 @@ for name in files:
 
 #Don't be a thief 
 print("Successfully deployed!")
-print("By MaheshChauhan • DroneBots")
+print("RADHE RADHE")
 
 if __name__ == "__main__":
     bot.run_until_disconnected()
