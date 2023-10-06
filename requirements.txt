@@ -12,6 +12,7 @@ python-decouple
 python-dotenv
 numpy
 asyncio
+uvloop
 pillow
 motor
 wheel
