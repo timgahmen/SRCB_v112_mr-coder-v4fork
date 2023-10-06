@@ -4,6 +4,8 @@ from pyrogram.errors import FloodWait, InviteHashInvalid, InviteHashExpired, Use
 from telethon import errors, events
 
 import asyncio, subprocess, re, os, time
+import uvloop
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 from pathlib import Path
 from datetime import datetime as dt
 
