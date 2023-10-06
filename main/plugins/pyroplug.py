@@ -75,10 +75,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                 data = video_metadata(file)
                 height, width, duration = data["height"], data["width"], data["duration"]
                 print(f'd: {duration}, w: {width}, h:{height}')
-                try:
-                    thumb_path = await screenshot(file, duration, sender)
-                except Exception:
-                    thumb_path = None
+                thumb_path = await screenshot(file, duration, sender)
                 await client.send_video_note(
                     chat_id=sender,
                     video_note=file,
