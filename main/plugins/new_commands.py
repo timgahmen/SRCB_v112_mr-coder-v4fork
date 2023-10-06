@@ -1,4 +1,7 @@
 # CREATED BY MYSELF WITH ALL EMOTIONS
+import asyncio
+import uvloop
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 from .. import bot as Drone
 from telethon import events, Button
