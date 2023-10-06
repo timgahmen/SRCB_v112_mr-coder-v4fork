@@ -5,7 +5,7 @@ import asyncio, time, os
 from .. import bot as Drone
 from main.plugins.progress import progress_for_pyrogram
 from main.plugins.helpers import screenshot, join, get_link
-
+from main.plugins.new_commands import quick_info
 from pyrogram import Client, filters
 from pyrogram.errors import ChannelBanned, ChannelInvalid, ChannelPrivate, ChatIdInvalid, ChatInvalid
 from pyrogram.enums import MessageMediaType
@@ -53,7 +53,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
                     return
-            edit = await client.edit_message_text(sender, edit_id, "Trying to Download.")
+            edit = await client.edit_message_text(sender, edit_id, "{disk}\nTrying to Download.")
             file = await userbot.download_media(
                 msg,
                 progress=progress_for_pyrogram,
