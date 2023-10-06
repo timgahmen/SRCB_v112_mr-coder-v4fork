@@ -1,8 +1,7 @@
 import glob
 import asyncio
 import uvloop
-loop = uvloop.new_event_loop()
-asyncio.set_event_loop(loop)
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 from pathlib import Path
 from main.utils import load_plugins
 import logging
