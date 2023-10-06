@@ -1,9 +1,6 @@
 #Github.com/Vasusen-code
 
 from pyrogram import Client
-import asyncio
-import uvloop
-asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 from telethon.sessions import StringSession
 from telethon.sync import TelegramClient
 
