@@ -1,6 +1,8 @@
 #Github.com-Vasusen-code
 
 import asyncio, time, os
+import uvloop
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 from .. import bot as Drone
 from main.plugins.progress import progress_for_pyrogram
