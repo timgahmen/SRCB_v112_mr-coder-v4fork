@@ -6,7 +6,8 @@ Plugin for both public & private channels!
 """
 
 import time, os, asyncio
-
+import uvloop
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 from .. import bot as Drone
 from .. import userbot, Bot, AUTH
 from .. import FORCESUB as fs
