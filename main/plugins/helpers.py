@@ -3,7 +3,7 @@
 from pyrogram.errors import FloodWait, InviteHashInvalid, InviteHashExpired, UserAlreadyParticipant
 from telethon import errors, events
 
-import asyncio, subprocess, re, os, time
+import asyncio, subprocess, re, os, time, importlib
 from pathlib import Path
 from datetime import datetime as dt
 
