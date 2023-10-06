@@ -53,7 +53,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                     await client.send_message(sender, msg.text.markdown)
                     await edit.delete()
                     return
-            edit = await client.edit_message_text(sender, edit_id, "{disk}\nTrying to Download.")
+            edit = await client.edit_message_text(sender, edit_id, "{disk_info}\nTrying to Download.")
             file = await userbot.download_media(
                 msg,
                 progress=progress_for_pyrogram,
