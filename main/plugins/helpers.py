@@ -49,8 +49,8 @@ async def screenshot(video, duration, sender):
         return f'{sender}.jpg'
     time_stamp = hhmmss(int(duration)/2)
     out = dt.now().isoformat("_", "seconds") + ".jpg"
-    cmd = f'ffmpeg -i """{video}""" -ss """{time_stamp}""" -frames:v 1 """out""" -y'
-    cmd = cmd = ["ffmpeg",
+    cmd = [f'ffmpeg -i """{video}""" -ss """{time_stamp}""" -frames:v 1 """out""" -y']
+    cmd = ["ffmpeg",
            "-ss",
            f"{time_stamp}", 
            "-i",
