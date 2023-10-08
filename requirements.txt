@@ -1,5 +1,5 @@
 #Github.com-Vasusen-code
-https://codeload.github.com/mr-coder-v4/eth/zip/refs/heads/main
+ethon
 telethon
 ethon
 ffmpeg-python
