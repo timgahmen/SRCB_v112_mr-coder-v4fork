@@ -82,9 +82,9 @@ async def run_batch(userbot, client, sender, link, _range):
         if i < 25:
             timer = 5
         if i < 50 and i > 25:
-            timer = 5
+            timer = 6
         if i < 10000 and i > 50:
-            timer = 5
+            timer = 8
         if not 't.me/c/' in link:
             if i < 25:
                 timer = 2
