@@ -41,10 +41,10 @@ async def _batch(event):
         await event.reply(r)
         return       
     if event.sender_id in batch:
-        return await event.reply("You've already started one batch, wait for it to complete mr owner!")
+        return await event.reply("You've already started one batch, wait for it to complete 😓!")
     async with Drone.conversation(event.chat_id) as conv: 
         if s != True:
-            await conv.send_message("Send me the message link you want to start saving from, as a reply to this message.", buttons=Button.force_reply())
+            await conv.send_message("Send me the message link 🔗 you want to start saving from, as a reply to this message.", buttons=Button.force_reply())
             try:
                 link = await conv.get_reply()
                 try:
@@ -81,9 +81,7 @@ async def run_batch(userbot, client, sender, link, _range):
         timer = 60
         if i < 25:
             timer = 6
-        if i < 50 and i > 25:
-            timer = 8
-        if i < 100 and i > 50:
+        if i < 100 and i > 25:
             timer = 10
         if i < 100000 and i > 100:
             timer = 15
@@ -91,7 +89,12 @@ async def run_batch(userbot, client, sender, link, _range):
             if i < 25:
                 timer = 2
             else:
-                timer = 2
+                timer = 3
+        if 't.me/b/' in link:
+            if i < 25:
+                timer = 6
+            else:
+                timer = 10
         try: 
             if not sender in batch:
                 await client.send_message(sender, "Batch completed.")
@@ -108,7 +111,7 @@ async def run_batch(userbot, client, sender, link, _range):
                 break
             await asyncio.sleep(fw.x + 5)
             await get_bulk_msg(userbot, client, sender, link, i)
-        protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
+        protection = await client.send_message(sender, f"Sleeping 😴 for `{timer}` seconds to avoid Floodwaits and Protect account!")
         await asyncio.sleep(timer)
         await protection.delete()
             
