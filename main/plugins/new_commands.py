@@ -6,6 +6,52 @@ from telethon import events, Button
 from asyncio import create_subprocess_shell as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 import psutil, os, signal
+from time import time
+from psutil import (boot_time, cpu_count, cpu_percent, disk_usage,
+                    net_io_counters, swap_memory, virtual_memory)
+from main.utils import TimeFormatter, humanbytes, botStartTime
+
+SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------#
+@Drone.on(events.NewMessage(incoming=True, pattern="/status"))
+async def show_status(event):
+    currentTime = TimeFormatter(time() - botStartTime)
+    osUptime = TimeFormatter(time() - boot_time())
+    total, used, free, disk = disk_usage('/')
+    total = humanbytes(total)
+    used = humanbytes(used)
+    free = humanbytes(free)
+    sent = humanbytes(net_io_counters().bytes_sent)
+    recv = humanbytes(net_io_counters().bytes_recv)
+    cpuUsage = cpu_percent(interval=0.5)
+    p_core = cpu_count(logical=False)
+    t_core = cpu_count(logical=True)
+    swap = swap_memory()
+    swap_p = swap.percent
+    memory = virtual_memory()
+    mem_t = humanbytes(memory.total)
+    mem_a = humanbytes(memory.available)
+    mem_u = humanbytes(memory.used)
+    await event.reply(f"""`
+Bot Uptime: {currentTime}
+OS: {osUptime}
+-------------------------
+Total Disk: {total}
+Used: {used}
+Free: {free}
+-------------------------
+UL: {sent} | DL: {recv}
+CPU: {cpuUsage}%
+Utilized: {swap_p}%
+Total Cores: {t_core}
+Physical Core: {p_core}
+------------------------- 
+Total RAM: {mem_t}
+Free RAM: {mem_a}
+Used: {mem_u}`""")
+    return 
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/ping"))
 async def test(event):
