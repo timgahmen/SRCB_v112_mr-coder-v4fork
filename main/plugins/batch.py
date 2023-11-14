@@ -80,7 +80,7 @@ async def run_batch(userbot, client, sender, link, _range):
     for i in range(_range):
         timer = 60
         if i < 25:
-            timer = 6
+            timer = 10
         if i < 100 and i > 25:
             timer = 10
         if i < 100000 and i > 100:
@@ -92,9 +92,9 @@ async def run_batch(userbot, client, sender, link, _range):
                 timer = 3
         if 't.me/b/' in link:
             if i < 25:
-                timer = 6
-            else:
                 timer = 10
+            else:
+                timer = 15
         try: 
             if not sender in batch:
                 await client.send_message(sender, "Batch completed.")
