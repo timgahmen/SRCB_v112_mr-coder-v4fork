@@ -32,7 +32,7 @@ async def show_status(event):
     stt = dt.now()
     ed = dt.now()
     ms = (ed - stt).microseconds / 1000
-    p = {ms}ms
+    p = f"{ms}ms"
     memory = virtual_memory()
     mem_t = humanbytes(memory.total)
     mem_a = humanbytes(memory.available)
