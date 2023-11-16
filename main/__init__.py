@@ -3,7 +3,7 @@
 from pyrogram import Client
 from telethon.sessions import StringSession
 from telethon.sync import TelegramClient
-
+import uvloop
 from decouple import config
 import logging, time, sys
 from os import environ
@@ -22,7 +22,7 @@ FORCESUB = config("FORCESUB", "bot_logv4")
 AUTH = config("AUTH", "1358657527", cast=int)
 
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
-
+uvloop.install()
 userbot = Client("saverestricted", session_string=SESSION, api_hash=API_HASH, api_id=API_ID) 
 
 try:
