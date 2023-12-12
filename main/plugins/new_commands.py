@@ -3,6 +3,7 @@ import asyncio
 
 from .. import bot as Drone
 from telethon import events, Button
+from telethon.tl import functions, types
 from asyncio import create_subprocess_shell as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 import psutil, os, signal
@@ -37,6 +38,7 @@ async def show_status(event):
     mem_t = humanbytes(memory.total)
     mem_a = humanbytes(memory.available)
     mem_u = humanbytes(memory.used)
+    await event.client.send_chat_action(event.chat_id, 'typing') 
     await event.reply(f"""`
 Bot Uptime: {currentTime}
 OS: {osUptime}
