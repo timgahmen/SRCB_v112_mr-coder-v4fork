@@ -38,7 +38,6 @@ async def show_status(event):
     mem_t = humanbytes(memory.total)
     mem_a = humanbytes(memory.available)
     mem_u = humanbytes(memory.used)
-    await client.send_chat_action(event.chat_id, action="typing")
     await event.reply(f"""`
 Bot Uptime: {currentTime}
 OS: {osUptime}
