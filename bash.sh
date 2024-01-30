@@ -1,5 +1,12 @@
+#!/bin/bash
+
+# Add color to the starting message
 echo -e "\e[1;36m$(pyfiglet -f slant "hare")\n$(pyfiglet -f slant "krishna")\e[0m"
-LANG=en_US.UTF-8
+
+# Set the language and encoding
+export LANG=en_US.UTF-8
 export PYTHONIOENCODING=utf-8
+
+# Clean git directory and run the Python main script in the background
 git clean -xdf
-nohup python -m main &
+nohup python -m main > /dev/null 2>&1 &
