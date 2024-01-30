@@ -1,6 +1,6 @@
 # CREATED BY MYSELF WITH ALL EMOTIONS
 import asyncio
-
+import socket
 from .. import bot as Drone
 from telethon import events, Button
 from telethon.tl import functions, types
@@ -76,6 +76,35 @@ async def test(event):
     except FileNotFoundError:
         await event.reply("**Install speedtest-cli**")
 
+@Drone.on(events.NewMessage(incoming=True, pattern="/ping1"))
+async def test(event):
+    try:
+        zylern = "speedtest --simple"
+        process = await asyncrunapp(
+            zylern,
+            stdout=asyncPIPE,
+            stderr=asyncPIPE,
+        )
+        stdout, stderr = await process.communicate()
+        output = stdout.decode().strip()
+
+        # Parsing the output to extract relevant information
+        server_name = output.split('Hosted by ')[1].split(' (')[0]
+        server_country = output.split('(')[1].split(')')[0]
+        server_latency = output.split(']: ')[1].split(' ms')[0]
+        download_speed = output.split('Download: ')[1].split(' Mbit/s')[0]
+        upload_speed = output.split('Upload: ')[1].split(' Mbit/s')[0]
+        ping = output.split(']: ')[1].split(' ms')[0]
+
+        # Getting client IP
+        client_ip = socket.gethostbyname(socket.gethostname())
+
+        result = f"Server: {server_name}, Country: {server_country}, Latency: {server_latency} ms, Download Speed: {download_speed} Mbit/s, Upload Speed: {upload_speed} Mbit/s, Ping: {ping} ms, Client IP: {client_ip}"
+        await event.reply(f"**{result}**")
+    except FileNotFoundError:
+        await event.reply("**Error: 'speedtest' command not found. Please install speedtest-cli**")
+    except Exception as e:
+        await event.reply(f"**Error: {e}**")
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/cpu"))
 async def storage(event):
