@@ -1,12 +1,27 @@
 #!/bin/bash
 
-# Add color to the starting message
+function check_requirements() {
+    if ! command -v pip &> /dev/null; then
+        echo "Error: pip is not installed. Please install pip to manage Python packages."
+        exit 1
+    fi
+
+    # Check if all packages listed in requirements.txt are installed
+    if ! pip install -r requirements.txt &> /dev/null; then
+        echo "Installing necessary packages using pip..."
+        pip install -U -r requirements.txt
+    else
+        echo "All pip dependencies are already installed."
+    fi
+}
+
+check_requirements  # Call the check_requirements function to install necessary packages if needed
+
 echo -e "\e[1;31m$(pyfiglet -f slant "starting")\n$(pyfiglet -f slant "bot")\e[0m\n\e[1;36m$(pyfiglet -f slant "hare")\n\e[1;36m$(pyfiglet -f slant "krishna")\e[0m"
 
-# Set the language and encoding
 export LANG=en_US.UTF-8
 export PYTHONIOENCODING=utf-8
 
-# Clean git directory and run the Python main script in the background
-git clean -xdfq
-nohup python -m main > /dev/null 2>&1 &
+git clean -xdfq  # Clean the git directory
+
+nohup python main.py > /dev/null 2>&1 &  # Run the Python main script in the background
