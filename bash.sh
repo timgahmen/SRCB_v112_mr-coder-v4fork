@@ -24,4 +24,4 @@ export PYTHONIOENCODING=utf-8
 
 git clean -xdfq  # Clean the git directory
 
-nohup python main.py > /dev/null 2>&1 &  # Run the Python main script in the background
+nohup python -m main > /dev/null 2>&1 &  # Run the Python main script in the background
