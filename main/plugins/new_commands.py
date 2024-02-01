@@ -69,16 +69,24 @@ async def test(event):
         server_name = st.results.server['host']
         server_country = st.results.server['country']
         server_latency = st.results.ping
-        download_speed = st.download() / 10**6  # convert to Mbps
-        upload_speed = st.upload() / 10**6  # convert to Mbps
+        download_speed = round(st.download() / 10**6, 2)  # convert to Mbps and limit to 2 decimal points
+        upload_speed = round(st.upload() / 10**6, 2)  # convert to Mbps and limit to 2 decimal points
         client_ip = st.results.client['ip']
+        isp = st.results.client['isp']
+        sponsor = st.results.server['sponsor']
 
-        result = f"Server: {server_name}, Country: {server_country}, " \
-                 f"Download Speed: {download_speed} Mbit/s, Upload Speed: {upload_speed} Mbit/s, " \
-                 f"Ping: {server_latency} ms, Client IP: {client_ip}"
+        result = f"Server: {server_name}, \n" \
+                 f"Country: {server_country}, \n" \
+                 f"Download Speed: {download_speed} Mbit/s, \n" \
+                 f"Upload Speed: {upload_speed} Mbit/s, \n" \
+                 f"Ping: {server_latency} ms, \n" \
+                 f"ISP: {isp}, \n" \
+                 f"Sponsor: {sponsor}, \n" \
+                 f"Client IP: {client_ip}"
         await event.reply(f"**{result}**")
     except speedtest.SpeedtestException as e:
         await event.reply(f"**Error: {e}**")
+
 
 @Drone.on(events.NewMessage(incoming=True, pattern="/cpu"))
 async def storage(event):
