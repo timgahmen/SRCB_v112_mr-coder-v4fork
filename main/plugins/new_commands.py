@@ -1,6 +1,7 @@
 # CREATED BY MYSELF WITH ALL EMOTIONS
 import asyncio
 import socket
+import speedtest
 from .. import bot as Drone
 from telethon import events, Button
 from telethon.tl import functions, types
