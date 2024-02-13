@@ -5,7 +5,7 @@ import logging
 from . import bot
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.ERROR)
+                    level=logging.WARNING)
 
 path = "main/plugins/*.py"
 files = glob.glob(path)
