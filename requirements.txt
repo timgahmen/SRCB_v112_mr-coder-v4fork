@@ -1,7 +1,7 @@
 #Github.com-Vasusen-code
 ethon
 telethon
-https://codeload.github.com/mr-coder-v4/ethon/zip/refs/heads/hachoir-update
+https://codeload.github.com/mr-coder-v4/ethon/zip/refs/heads/update-v2
 ffmpeg-python
 cryptg
 tgcrypto
