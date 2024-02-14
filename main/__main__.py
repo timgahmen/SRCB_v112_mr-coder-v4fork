@@ -16,8 +16,8 @@ for name in files:
         load_plugins(plugin_name.replace(".py", ""))
 
 #Don't be a thief 
-print("Successfully deployed!")
-print("RADHE RADHE")
+custom_fig = pyfiglet.Figlet(font='small')
+print('\033[36m' + custom_fig.renderText('Bot started') + '\033[0m')
 
 if __name__ == "__main__":
     bot.run_until_disconnected()
