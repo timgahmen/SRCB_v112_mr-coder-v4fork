@@ -2,6 +2,7 @@ import glob
 from pathlib import Path
 from main.utils import load_plugins
 import logging
+import pyfiglet
 from . import bot
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
