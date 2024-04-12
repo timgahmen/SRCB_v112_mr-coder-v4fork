@@ -49,7 +49,16 @@ async def screenshot(video, duration, sender):
         return f'{sender}.jpg'
     time_stamp = hhmmss(int(duration)/2)
     out = dt.now().isoformat("_", "seconds") + ".jpg"
-    cmd = ["ffmpeg", "-ss", f"{time_stamp}", "-i", f"{video}", "-vf", "scale=640:480", "-seek_head", "1", "-frames:v", "1", "-pix_fmt", "yuv420p", f"{out}", "-y"]
+    cmd = ["ffmpeg",
+           "-ss",
+           f"{time_stamp}", 
+           "-i",
+           f"{video}",
+           "-frames:v",
+           "1", 
+           f"{out}",
+           "-y"
+          ]
     process = await asyncio.create_subprocess_exec(
         *cmd,
         stdout=asyncio.subprocess.PIPE,
