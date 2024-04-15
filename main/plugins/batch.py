@@ -1,6 +1,3 @@
-#Tg:MaheshChauhan/DroneBots
-#Github.com/Vasusen-code
-
 """
 Plugin for both public & private channels!
 """
@@ -76,6 +73,7 @@ async def _batch(event):
             conv.cancel()
             batch.clear()
 
+
 async def run_batch(userbot, client, sender, link, _range):
     for i in range(_range):
         timer = 60
@@ -90,6 +88,7 @@ async def run_batch(userbot, client, sender, link, _range):
                 timer = 3
             else:
                 timer = 5
+                
         try: 
             if not sender in batch:
                 await client.send_message(sender, "Batch completed.")
@@ -98,15 +97,27 @@ async def run_batch(userbot, client, sender, link, _range):
             print(e)
             await client.send_message(sender, "Batch completed.")
             break
+            
         try:
-            await get_bulk_msg(userbot, client, sender, link, i) 
-        except FloodWait as fw:
-            if int(fw.x) > 299:
-                await client.send_message(sender, "Cancelling batch since you have floodwait more than 5 minutes.")
-                break
-            await asyncio.sleep(fw.x + 5)
-            await get_bulk_msg(userbot, client, sender, link, i)
+            # Download the video using get_bulk_msg function
+            video_path = await get_bulk_msg(userbot, client, sender, link, i) 
+            
+            # Compress the downloaded video using ffmpeg
+            compressed_video_path = f"{video_path}_compressed.mkv"
+            compress_command = f'ffmpeg -hide_banner -loglevel quiet -i \"{video_path}\" -c:v libx265 -x265-params "level=6.1:profile=main:high-tier=1:packetizer=hvc1" -crf 25 -vf "scale=854:480" -color_primaries 1 -color_trc 1 -colorspace 1 -pix_fmt yuv420p -color_range 2 -r 30 -c:a libopus -b:a 192k -vbr on -map 0 \"{compressed_video_path}\"'
+            subprocess.run(compress_command, shell=True)
+            
+            # Upload the compressed video
+            await client.send_file(sender, compressed_video_path)
+            
+            # Delete the compressed video file
+            os.remove(compressed_video_path)
+        except Exception as e:
+            print(e)
+            await client.send_message(sender, "An error occurred while processing the video.")
+            break
+            
+        # Sleep to avoid Floodwait and protect account
         protection = await client.send_message(sender, f"Sleeping for `{timer}` seconds to avoid Floodwaits and Protect account!")
         await asyncio.sleep(timer)
         await protection.delete()
-            
