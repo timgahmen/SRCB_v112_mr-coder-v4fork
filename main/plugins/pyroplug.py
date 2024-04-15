@@ -100,12 +100,15 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                 height, width, duration = data["height"], data["width"], data["duration"]
                 print(f'd: {duration}, w: {width}, h:{height}')
                 try:
+                    compressed_video_path = await compress_video(file, "compressed_video")
+                except Exception:
+                    compressed_video_path = None
                     thumb_path = await screenshot(file, duration, sender)
                 except Exception:
                     thumb_path = None
                 await client.send_video(
                     chat_id=sender,
-                    video=file,
+                    video=compressed_video_path,
                     caption=caption,
                     supports_streaming=True,
                     height=height, width=width, duration=duration, 
