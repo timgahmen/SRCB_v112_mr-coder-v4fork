@@ -54,6 +54,13 @@ async def screenshot(video, duration, sender):
            f"{time_stamp}", 
            "-i",
            f"{video}",
+           "-vcodec", "libx265",  # Video codec
+           "-crf", "25",  # Constant Rate Factor for quality and compression
+           "-preset", "fast",  # Preset for compression speed
+           "-tag:v", "hvc1",  # Tag for HEVC video codec profile
+           "-acodec", "libopus",  # Audio codec for Opus
+           "-b:a", "196k",  # Audio bitrate for high-quality Opus
+           "-movflags", "+faststart",  # For web streaming
            "-frames:v",
            "1", 
            f"{out}",
@@ -71,15 +78,3 @@ async def screenshot(video, duration, sender):
         return out
     else:
         None       
-
-
-async def compress_video(video, compressed_path):
-   # cmd = ["ffmpeg", "-i", video_path, "-c:v", "libx264", "-crf", "23", "-preset", "veryslow", compressed_path]
-    cmd = f'ffmpeg -hide_banner -loglevel quiet -i "{video}" -stats -preset ultrafast -c:v libx265 -x265-params "level=6.1:profile=main:high-tier=1:packetizer=hvc1" -crf 25 -vf "scale=854:480" -color_primaries 1 -color_trc 1 -colorspace 1 -pix_fmt yuv420p -color_range 2 -r 30 -c:a libopus -b:a 192k -vbr on -c:s copy -map 0 "{compressed_path}"'
-    process = await asyncio.create_subprocess_exec(*cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
-    stdout, stderr = await process.communicate()
-
-    if os.path.isfile(compressed_path):
-        return compressed_path
-    else:
-        return None
