@@ -1,6 +1,6 @@
 #Github.com-Vasusen-code
 
-import asyncio, time, os
+import asyncio, time, os, subprocess, shutil
 
 from .. import bot as Drone
 from main.plugins.progress import progress_for_pyrogram
