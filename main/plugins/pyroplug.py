@@ -113,9 +113,8 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                     thumb_path = None
 
                 compressed_file = f'{sender}_compressed.mp4'
-                subprocess.call(['ffmpeg', '-i', file, '-c:v', 'libx265', '-tag:v', 'hvc1', '-c:a', 'copy', compressed_file])
-                
-
+             #   subprocess.call(['ffmpeg', '-i', file, '-c:v', 'libx265', '-tag:v', 'hvc1', '-c:a', 'copy', compressed_file])
+                subprocess.call(['ffmpeg', '-hide_banner', '-loglevel', 'quiet', '-i', file, '-c:v', 'libx265', '-tag:v', 'hvc1', '-preset', 'ultrafast', '-crf', '25', '-c:a', 'libopus', '-b:a', '192K', '-map', '0', compressed_file]) 
                 await client.send_video(
                     chat_id=sender,
                     video=compressed_file,
