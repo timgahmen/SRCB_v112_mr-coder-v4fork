@@ -54,12 +54,6 @@ async def screenshot(video, duration, sender):
            f"{time_stamp}", 
            "-i",
            f"{video}",
-           "-vcodec", "libx265",  # Video codec
-           "-crf", "25",  # Constant Rate Factor for quality and compression
-           "-preset", "ultrafast",  # Preset for compression speed
-           "-tag:v", "hvc1",  # Tag for HEVC video codec profile
-           "-acodec", "libopus",  # Audio codec for Opus
-           "-b:a", "196k",  # Audio bitrate for high-quality Opus
            "-frames:v",
            "1", 
            f"{out}",
