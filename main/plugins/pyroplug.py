@@ -104,6 +104,8 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                 data = video_metadata(file)
                 print("Compressing video to HEVC with hvc1 tag")
                 compressed_file = f"compressed_{file}"
+                if os.path.exists(compressed_file):
+                    os.remove(compressed_file)
                 await compress_video(file, compressed_file)
                 height, width, duration = data["height"], data["width"], data["duration"]
                 print(f'd: {duration}, w: {width}, h:{height}')
