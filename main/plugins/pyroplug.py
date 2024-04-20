@@ -19,6 +19,11 @@ def thumbnail(sender):
         return f'{sender}.jpg'
     else:
          return None
+
+async def compress_video(input_file, output_file):
+    # Add video compression logic using HEVC codec with hvc1 tag
+    command = f'ffmpeg -hide_banner -loglevel quiet -i {input_file} -preset ultrafast -c:v libx265 -tag:v hvc1 -crf 25 -color_primaries 1 -color_trc 1 -colorspace 1 -pix_fmt yuv420p -color_range 2 -r 30 -c:a libopus -b:a 192k -vbr on -c:s copy -map 0 {output_file}'
+    os.system(command)
       
 async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
     
@@ -97,6 +102,9 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
             elif msg.media==MessageMediaType.VIDEO and msg.video.mime_type in ["video/mp4", "video/x-matroska"]:
                 print("Trying to get metadata")
                 data = video_metadata(file)
+                print("Compressing video to HEVC with hvc1 tag")
+                compressed_file = f"compressed_{file}"
+                await compress_video(file, compressed_file)
                 height, width, duration = data["height"], data["width"], data["duration"]
                 print(f'd: {duration}, w: {width}, h:{height}')
                 try:
@@ -107,7 +115,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                     compressed_video = None
                 await client.send_video(
                     chat_id=sender,
-                    video=compressed_video,
+                    video=compressed_file,
                     caption=caption,
                     supports_streaming=True,
                     height=height, width=width, duration=duration, 
