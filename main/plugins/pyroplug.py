@@ -121,7 +121,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                        '-pix_fmt', 'yuv420p', '-color_range', '2', '-r', '30', '-c:a',
                        'libopus', '-b:a', '192k', '-map', '0', compressed_file
                       ]
-                subprocess.run(cmd)
+                subprocess.call(cmd)
 
                 await client.send_video(
                     chat_id=sender,
