@@ -107,11 +107,11 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                 compressed_file = f'{sender}_compressed.mp4'
                 process = await asyncio.create_subprocess_exec(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'quiet', '-i', file, '-map', '0', '-c:v', 'libx265', '-color_primaries', '1', '-color_trc', '1', '-colorspace', '1', '-pix_fmt', 'yuv420p', '-color_range', '2', '-x265-params', 'log-level=warning:level=6.1:high-tier=1:profile=main', '-preset', 'ultrafast', '-crf', '23', '-tag:v', 'hvc1', '-acodec', 'copy', '-c:s', 'copy', compressed_file])
                # subprocess.call(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'quiet', '-i', file, '-map', '0', '-c:v', 'libx265', '-color_primaries', '1', '-color_trc', '1', '-colorspace', '1', '-pix_fmt', 'yuv420p', '-color_range', '2', '-x265-params', 'log-level=warning:level=6.1:high-tier=1:profile=main', '-preset', 'ultrafast', '-crf', '24', '-tag:v', 'hvc1', '-acodec', 'copy', '-c:s', 'copy', compressed_file])
-                name = os.path.basename(file)
-                base_name, _ = os.path.splitext(name)
+                name = file.split("/")[-1]
+                base_name = os.path.splitext(name)[0]
                 new_extension = 'mkv'
-                new_filename = f'{base_name}.{new_extension}'
-                text = new_filename
+                new_filename = base_name + '.' + new_extension
+                text = f'{new_filename}'
                 await process.wait()
                 await client.send_video(
                     chat_id=sender,
