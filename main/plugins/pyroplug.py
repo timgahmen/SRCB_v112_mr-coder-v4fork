@@ -20,11 +20,7 @@ def thumbnail(sender):
     else:
          return None
 
-async def compress_video(input_file, output_file):
-    # Add video compression logic using HEVC codec with hvc1 tag
-    command = f'ffmpeg -hide_banner -loglevel quiet -i {input_file} -preset ultrafast -c:v libx265 -tag:v hvc1 -crf 25 -color_primaries 1 -color_trc 1 -colorspace 1 -pix_fmt yuv420p -color_range 2 -r 30 -c:a libopus -b:a 192k -vbr on -c:s copy -map 0 {output_file}'
-    os.system(command)
-      
+
 async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
     
     """ userbot: PyrogramUserBot
@@ -117,7 +113,7 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                 compressed_file = f'{sender}_compressed.mp4'
               #  subprocess.call(['ffmpeg', '-hide_banner', '-loglevel', 'quiet', '-i', file, '-c:v', 'libx265', '-tag:v', 'hvc1', '-c:a', 'copy', compressed_file])
               #  subprocess.call(['ffmpeg', '-hide_banner', '-loglevel', 'quiet', '-i', file, '-c:v', 'libx265', '-preset', 'ultrafast', '-crf', '25', '-tag:v', 'hvc1', '-c:a', 'copy', compressed_file])
-                subprocess.call(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'quiet', '-i', file, '-map', '0', '-c:v', 'libx265', '-color_primaries', '1', '-color_trc', '1', '-colorspace', '1', '-pix_fmt', 'yuv420p', '-color_range', '2', '-x265-params', 'log-level=none:level=6.1:high-tier=1:profile=main', '-preset', 'ultrafast', '-crf', '24', '-tag:v', 'hvc1', '-acodec', 'copy', '-c:s', 'copy', compressed_file])
+                subprocess.call(['ffmpeg', '-y', '-hide_banner', '-loglevel', 'quiet', '-i', file, '-map', '0', '-c:v', 'libx265', '-color_primaries', '1', '-color_trc', '1', '-colorspace', '1', '-pix_fmt', 'yuv420p', '-color_range', '2', '-x265-params', 'log-level=warning:level=6.1:high-tier=1:profile=main', '-preset', 'ultrafast', '-crf', '24', '-tag:v', 'hvc1', '-acodec', 'copy', '-c:s', 'copy', compressed_file])
                 await client.send_video(
                     chat_id=sender,
                     video=compressed_file,
