@@ -110,9 +110,9 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                 if data:
                     video_height = data["height"]
                     video_width = data["width"]
-                    if video_height > 720 or video_width > 1280:
+                    if video_height > 960 or video_width > 540:
                         index = cmd_f.index('-c:v', 'libx265') + 1
-                        cmd_f.insert(index, '-vf', 'scale=1280:-1')      
+                        cmd_f.insert(index, '-vf', 'scale=960:-1')      
                         
                 subprocess.call(cmd_f)
                 name = file.split("/")[-1]
