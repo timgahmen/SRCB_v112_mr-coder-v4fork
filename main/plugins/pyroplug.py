@@ -1,5 +1,3 @@
-#Github.com-Vasusen-code
-
 import asyncio, time, os, subprocess, shutil
 
 from .. import bot as Drone
@@ -122,7 +120,6 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
                 await client.send_video(
                     chat_id=sender,
                     video=compressed_file,
-                    caption=caption,
                     supports_streaming=True,
                     file_name=text,
                     caption=text,
