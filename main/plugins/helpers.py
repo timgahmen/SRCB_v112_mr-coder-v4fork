@@ -56,6 +56,10 @@ async def screenshot(video, duration, sender):
            f"{video}",
            "-frames:v",
            "1", 
+           "-vf",
+           "scale=1280:-1",
+           "-q:v",
+           "1",
            f"{out}",
            "-y"
           ]
