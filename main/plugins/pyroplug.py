@@ -106,6 +106,13 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
 
                 compressed_file = f'{sender}_compressed.mp4'
                 cmd_f = ['ffmpeg', '-y', '-hide_banner', '-loglevel', 'quiet','-threads', '12', '-i', file, '-map', '0', '-c:v', 'libx265', '-color_primaries', '1', '-color_trc', '1', '-colorspace', '1', '-pix_fmt', 'yuv420p', '-color_range', '2', '-x265-params', 'no-strict-cbr=1:log-level=warning:level=6.1:high-tier=1:profile=main', '-preset', 'ultrafast', '-crf', '23', '-tag:v', 'hvc1', '-acodec', 'copy', '-c:s', 'copy', compressed_file]
+                
+                if data:
+                    video_height = data["height"]
+                    video_width = data["width"]
+                    if video_height > 720 or video_width > 1280:
+                        cmd_f.insert(cmd_f.index('-c:v', 'libx265') + 1, '-vf', 'scale=1280:-1')
+                        
                 subprocess.call(cmd_f)
                 name = file.split("/")[-1]
                 base_name = os.path.splitext(name)[0]
